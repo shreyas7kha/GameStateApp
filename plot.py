@@ -5,17 +5,18 @@ import matplotlib.patches as patches
 
 import numpy as np
 
-mpl.rcParams['font.family']= 'Calibri'
-mpl.rcParams['font.size'] = 12
-mpl.rcParams['font.weight'] = 'bold'
-mpl.rcParams['legend.title_fontsize'] = 20
-mpl.rcParams['legend.fontsize'] = 17
 
 def dark_theme():
+    mpl.rcParams['font.size'] = 12
+    mpl.rcParams['font.weight'] = 'bold'
+    mpl.rcParams['font.family']= 'Calibri'
     mpl.rcParams['text.color'] = 'white'
     return 'white', 'black'
 
 def light_theme():
+    mpl.rcParams['font.size'] = 12
+    mpl.rcParams['font.weight'] = 'bold'
+    mpl.rcParams['font.family']= 'Calibri'
     mpl.rcParams['text.color'] = 'black'
     return 'black', 'white'
 
@@ -85,8 +86,8 @@ def plot_pitch(df, theme = 'light', player_col='red'):
 
     # ADD TITLES
     ax.set_title(f'{player.upper()}', color=gold_col, loc='left', 
-        pad=25, weight='heavy', size=22)
-    ax.text(103, 104.5,  f'{start_year}-{end_year+1} | League games only', size=13)
-    fig.text(0.15, 0.05, 'Made using All About GameStates App. By @khatri_shreyas.', size=7)
+        pad=35, weight='heavy', size=22)
+    ax.text(103, 110,  f'{start_year}-{end_year+1} | League games only', size=13)
+    fig.text(0.15, 0.02, 'Made using All About GameStates App. By @khatri_shreyas.', size=7)
 
     return fig, ax
