@@ -5,16 +5,11 @@ import matplotlib.patches as patches
 
 import numpy as np
 
-mpl.rcParams['font.family']= 'Century Gothic'
+mpl.rcParams['font.family']= 'Calibri'
 mpl.rcParams['font.size'] = 12
 mpl.rcParams['font.weight'] = 'bold'
 mpl.rcParams['legend.title_fontsize'] = 20
 mpl.rcParams['legend.fontsize'] = 17
-
-font_dirs = ['Century Gothic']
-font_files = mpl.font_manager.findSystemFonts(fontpaths=font_dirs)
-for font_file in font_files:
-    mpl.font_manager.fontManager.addfont(font_file)
 
 def dark_theme():
     mpl.rcParams['text.color'] = 'white'
@@ -72,14 +67,14 @@ def plot_pitch(df, theme = 'light', player_col='red'):
     # TEXT
     ax.scatter(np.linspace(90,10,5), [56]*5, c=bg_color, ec=point_color, marker='h', s=2000, ls='--', alpha=0.5)
     
-    ax.text(90, 56,'{}'.format(total_shots), size=13, color=player_col, ha='center', va='center', family='Century Gothic')
-    ax.text(70, 56,'{}'.format(total_goals), size=13, color=player_col, ha='center', va='center', family='Century Gothic')
+    ax.text(90, 56,'{}'.format(total_shots), size=13, color=player_col, ha='center', va='center')
+    ax.text(70, 56,'{}'.format(total_goals), size=13, color=player_col, ha='center', va='center')
     ax.text(50, 56,'{:.2f}'.format((total_goals-total_xg)/total_shots), size=13, color=player_col, 
-        ha='center', va='center', family='Century Gothic')
+        ha='center', va='center')
     ax.text(30, 56,'{:.2f}'.format(total_xg/total_shots), size=13, color=player_col, 
-        ha='center', va='center', family='Century Gothic')
+        ha='center', va='center')
     ax.text(10, 56,'{}'.format(sum(df['Changed Game State']==True)), size=13, color=player_col, 
-        ha='center', va='center', family='Century Gothic')
+        ha='center', va='center')
     
     
     ax.text(90, 50,'Total\nShots', size=8, color=in_col, ha='center', va='top')
