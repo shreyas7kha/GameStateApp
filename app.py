@@ -1,4 +1,3 @@
-from opcode import stack_effect
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -53,13 +52,15 @@ if only_changed_gs:
 def find_distance(x, y):
     return np.sqrt(np.sum(np.square(np.array([100, 50])-np.array([x*100, y*100]))))
 # GROUPBY DF
-df_gb = df_fil[['Player ID','x','y', 'Shot xG','isGoal','Filter Game_State']].groupby("Filter Game_State").agg(['sum', 'count'])
-df_gb['Distance'] = df_gb.apply(lambda x: find_distance(x['x']['sum']/x['x']['count'], x['y']['sum']/x['y']['count']), axis=1)
-df_gb = df_gb.drop([('Player ID',   'sum'), (  'Shot xG', 'count'), (   'isGoal', 'count'),
+def generate_gb_df():
+    df_gb = df_fil[['Player ID','x','y', 'Shot xG','isGoal','Filter Game_State']].groupby("Filter Game_State").agg(['sum', 'count'])
+    df_gb['Distance'] = df_gb.apply(lambda x: find_distance(x['x']['sum']/x['x']['count'], x['y']['sum']/x['y']['count']), axis=1)
+    df_gb = df_gb.drop([('Player ID',   'sum'), (  'Shot xG', 'count'), (   'isGoal', 'count'),
                     (   'x', 'count'), (   'x', 'sum'), (   'y', 'count'), (   'y', 'sum')], axis=1)
-df_gb.columns = ['Total Shots', 'Total xG', 'Total Goals', 'Distance From Goal']
-df_gb['xG Overperformance'] = df_gb['Total Goals'] - df_gb['Total xG']
-df_gb['xG O/P per Shot'] = df_gb['xG Overperformance']/df_gb['Total Shots']
+    df_gb.columns = ['Total Shots', 'Total xG', 'Total Goals', 'Distance From Goal']
+    df_gb['xG Overperformance'] = df_gb['Total Goals'] - df_gb['Total xG']
+    df_gb['xG O/P per Shot'] = df_gb['xG Overperformance']/df_gb['Total Shots']
+    return df_gb
 
 
 def convert_df(df):
@@ -70,7 +71,7 @@ def convert_df(df):
 if len(df_fil) > 0:
     st.header("\n\nPlayer: {}".format(df_fil['Player'].unique()[0]))
     st.subheader("\nPLAYER SHOT BY GAMESTATE COMPARISON")
-    st.table(df_gb)
+    st.table(generate_gb_df())
 else:
     st.error("Sorry no entries with these inputs, please change your inputs")
     
