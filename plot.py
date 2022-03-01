@@ -74,11 +74,11 @@ def plot_pitch(df, theme = 'light', player_col='red'):
     ax.text(10, 56,'{}'.format(sum(df['Changed Game State']==True)), size=13, color=player_col, ha='center', va='center')
     
     
-    ax.text(90, 51.5,'Total\nShots', size=8, color=in_col, ha='center', va='top')
-    ax.text(70, 51.5,'Total\nGoals', size=8, color=in_col, ha='center', va='top')
-    ax.text(50, 51.5,'Finishing\nOverperformance\nper Shot', size=8, color=in_col, ha='center', va='top')
-    ax.text(30, 51.5,'xG\nper Shot', size=8, color=in_col, ha='center', va='top')
-    ax.text(10, 51.5,'Number of\nGame-State\nAltering Goals', size=8, color=in_col, ha='center', va='top')
+    ax.text(90, 50,'Total\nShots', size=8, color=in_col, ha='center', va='top')
+    ax.text(70, 50,'Total\nGoals', size=8, color=in_col, ha='center', va='top')
+    ax.text(50, 50,'Finishing\nOverperformance\nper Shot', size=8, color=in_col, ha='center', va='top')
+    ax.text(30, 50,'xG\nper Shot', size=8, color=in_col, ha='center', va='top')
+    ax.text(10, 50,'Number of\nGame-State\nAltering Goals', size=8, color=in_col, ha='center', va='top')
 
     # ADD TITLES
     ax.set_title(f'{player.upper()}', color=gold_col, loc='left', 
