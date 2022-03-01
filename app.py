@@ -3,9 +3,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from plot import plot_pitch
-import matplotlib as mpl
-
-mpl.rcParams['font.family']= 'Century Gothic'
 
 df = pd.read_csv('data/AppData.gz', encoding='utf-8-sig')
 df_fil = df.copy()

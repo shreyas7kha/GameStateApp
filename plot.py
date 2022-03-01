@@ -59,31 +59,34 @@ def plot_pitch(df, theme = 'light', player_col='red'):
     ax.add_patch(circle)
     ax.annotate("", xy=(50-avg_distance_to_goal, 102.5), xycoords='data', 
                 xytext=(50, 102.5), textcoords='data',
-                size=10, arrowprops=dict(arrowstyle="-|>",fc='none', ls='--', ec=player_col))
+                size=10, arrowprops=dict(arrowstyle="-|>",fc='none', ls='--', ec=player_col), family='Century Gothic')
     ax.text(49-avg_distance_to_goal, 102.5, "{:.2f}m".format(avg_distance_to_goal), size=11.5, 
-            ha='left', va='center',c=in_col)
-    ax.text(51, 102.5, "Avg distance", size=8, ha='right', va='center')
+            ha='left', va='center',c=in_col, family='Century Gothic')
+    ax.text(51, 102.5, "Avg distance", size=8, ha='right', va='center', family='Century Gothic')
 
     # TEXT
     ax.scatter(np.linspace(90,10,5), [56]*5, c=bg_color, ec=point_color, marker='h', s=2000, ls='--', alpha=0.5)
     
-    ax.text(90, 56,'{}'.format(total_shots), size=13, color=player_col, ha='center', va='center')
-    ax.text(70, 56,'{}'.format(total_goals), size=13, color=player_col, ha='center', va='center')
-    ax.text(50, 56,'{:.2f}'.format((total_goals-total_xg)/total_shots), size=13, color=player_col, ha='center', va='center')
-    ax.text(30, 56,'{:.2f}'.format(total_xg/total_shots), size=13, color=player_col, ha='center', va='center')
-    ax.text(10, 56,'{}'.format(sum(df['Changed Game State']==True)), size=13, color=player_col, ha='center', va='center')
+    ax.text(90, 56,'{}'.format(total_shots), size=13, color=player_col, ha='center', va='center', family='Century Gothic')
+    ax.text(70, 56,'{}'.format(total_goals), size=13, color=player_col, ha='center', va='center', family='Century Gothic')
+    ax.text(50, 56,'{:.2f}'.format((total_goals-total_xg)/total_shots), size=13, color=player_col, 
+        ha='center', va='center', family='Century Gothic')
+    ax.text(30, 56,'{:.2f}'.format(total_xg/total_shots), size=13, color=player_col, 
+        ha='center', va='center', family='Century Gothic')
+    ax.text(10, 56,'{}'.format(sum(df['Changed Game State']==True)), size=13, color=player_col, 
+        ha='center', va='center', family='Century Gothic')
     
     
-    ax.text(90, 50,'Total\nShots', size=8, color=in_col, ha='center', va='top')
-    ax.text(70, 50,'Total\nGoals', size=8, color=in_col, ha='center', va='top')
-    ax.text(50, 50,'Finishing\nOverperformance\nper Shot', size=8, color=in_col, ha='center', va='top')
-    ax.text(30, 50,'xG\nper Shot', size=8, color=in_col, ha='center', va='top')
-    ax.text(10, 50,'Number of\nGame-State\nAltering Goals', size=8, color=in_col, ha='center', va='top')
+    ax.text(90, 50,'Total\nShots', size=8, color=in_col, ha='center', va='top', family='Century Gothic')
+    ax.text(70, 50,'Total\nGoals', size=8, color=in_col, ha='center', va='top', family='Century Gothic')
+    ax.text(50, 50,'Finishing\nOverperformance\nper Shot', size=8, color=in_col, ha='center', va='top', family='Century Gothic')
+    ax.text(30, 50,'xG\nper Shot', size=8, color=in_col, ha='center', va='top', family='Century Gothic')
+    ax.text(10, 50,'Number of\nGame-State\nAltering Goals', size=8, color=in_col, ha='center', va='top', family='Century Gothic')
 
     # ADD TITLES
     ax.set_title(f'{player.upper()}', color=gold_col, loc='left', 
-        pad=25, weight='heavy', size=22)
-    ax.text(103, 104.5,  f'{start_year}-{end_year+1} | League games only', size=13)
-    fig.text(0.15, 0.05, 'Made using All About GameStates App. By @khatri_shreyas.', size=7)
+        pad=25, weight='heavy', size=22, family='Century Gothic')
+    ax.text(103, 104.5,  f'{start_year}-{end_year+1} | League games only', size=13, family='Century Gothic')
+    fig.text(0.15, 0.05, 'Made using All About GameStates App. By @khatri_shreyas.', size=7, family='Century Gothic')
 
     return fig, ax
