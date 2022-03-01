@@ -87,7 +87,7 @@ def plot_pitch(df, theme = 'light', player_col='red'):
     # ADD TITLES
     ax.set_title(f'{player.upper()}', color=gold_col, loc='left', 
         pad=35, weight='heavy', size=22)
-    ax.text(103, 110,  f'{start_year}-{end_year+1} | League games only', size=13)
+    ax.text(103, 107,  f'{start_year}-{end_year+1} | League games only', size=13)
     fig.text(0.15, 0.02, 'Made using All About GameStates App. By @khatri_shreyas.', size=7)
 
     return fig, ax
