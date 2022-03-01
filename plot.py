@@ -65,7 +65,7 @@ def plot_pitch(df, theme = 'light', player_col='red'):
     ax.text(51, 102.5, "Avg distance", size=8, ha='right', va='center')
 
     # TEXT
-    ax.scatter(np.linspace(90,10,5), [56]*5, c=bg_color, ec=point_color, marker='h', s=1500, ls='--', alpha=0.5)
+    ax.scatter(np.linspace(90,10,5), [56]*5, c=bg_color, ec=point_color, marker='h', s=2000, ls='--', alpha=0.5)
     
     ax.text(90, 56,'{}'.format(total_shots), size=13, color=player_col, ha='center', va='center')
     ax.text(70, 56,'{}'.format(total_goals), size=13, color=player_col, ha='center', va='center')
