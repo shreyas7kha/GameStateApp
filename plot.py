@@ -58,12 +58,12 @@ def plot_pitch(df, theme = 'light', player_col='red'):
     # DISTANCE
     circle = patches.Circle((50, 100), avg_distance_to_goal, ec=point_color, fc='None', alpha=0.5, ls=':', lw=1.5)
     ax.add_patch(circle)
-    ax.annotate("", xy=(50-avg_distance_to_goal, 102.5), xycoords='data', 
-                xytext=(50, 102.5), textcoords='data',
+    ax.annotate("", xy=(50-avg_distance_to_goal, 101.5), xycoords='data', 
+                xytext=(50, 101.5), textcoords='data',
                 size=10, arrowprops=dict(arrowstyle="-|>",fc='none', ls='--', ec=player_col))
-    ax.text(49-avg_distance_to_goal, 102.5, "{:.2f}m".format(avg_distance_to_goal), size=11.5, 
+    ax.text(49-avg_distance_to_goal, 101.5, "{:.2f}m".format(avg_distance_to_goal), size=10, 
             ha='left', va='center',c=in_col)
-    ax.text(51, 102.5, "Avg distance", size=8, ha='right', va='center')
+    ax.text(51, 101.5, "Avg distance", size=8, ha='right', va='center')
 
     # TEXT
     ax.scatter(np.linspace(90,10,5), [56]*5, c=bg_color, ec=point_color, marker='h', s=2000, ls='--', alpha=0.5)
@@ -86,8 +86,8 @@ def plot_pitch(df, theme = 'light', player_col='red'):
 
     # ADD TITLES
     ax.set_title(f'{player.upper()}', color=gold_col, loc='left', 
-        pad=35, weight='heavy', size=22)
-    ax.text(103, 106.5,  f'{start_year}-{end_year+1} | League games only', size=13)
+        pad=21, weight='heavy', size=22)
+    ax.text(103, 104,  f'{start_year}-{end_year+1} | League games only', size=13)
     fig.text(0.15, 0.02, 'Made using All About GameStates App. By @khatri_shreyas.', size=7)
 
     return fig, ax
