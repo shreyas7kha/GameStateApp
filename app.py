@@ -15,13 +15,13 @@ st.caption("Made by Shreyas Khatri. Twitter: @khatri_shreyas", unsafe_allow_html
 
 # WIDGETS SIDEBAR
 st.sidebar.header("PLAYER INPUTS")
-player_id = st.sidebar.number_input("Input Understat Player ID:", 
-    format='%d',
-    value = 2097
+player_id = st.sidebar.selectbox("Input Understat Player Name and ID:", 
+    options= sorted(df['Player ID'].unique()),
+    index = 3178,
 )
 start_year, end_year = st.sidebar.select_slider(
      "Select Range of Seasons:",
-     options=[x for x in range(2014, 2021)],
+     options=[x for x in range(2014, 2022)],
      value=(2014,2020)
 )
 filter_gs = st.sidebar.multiselect(
@@ -29,11 +29,13 @@ filter_gs = st.sidebar.multiselect(
     options = df['Filter Game_State'].unique().tolist(),
     default = df['Filter Game_State'].unique().tolist()
 )
-player_col = st.sidebar.color_picker('Pick A Color', '#EA2304')
+player_col = st.sidebar.color_picker('Pick A Color:', '#EA2304')
 theme = st.sidebar.radio(
-     "Visualisation Theme",
+     "Visualisation Theme:",
      ('dark', 'light')
 )
+goal_alpha = st.sidebar.number_input('Change Transparency of Goal Scatter Points:',
+    max_value=1.0, min_value=0.0, value=0.5)
 only_goals = st.sidebar.checkbox('Show Only Goals')
 add_pens = st.sidebar.checkbox('Keep Penalties')
 only_changed_gs = st.sidebar.checkbox('Show Only Game State Altering Moments')
@@ -58,6 +60,7 @@ def generate_gb_df():
     df_gb = df_gb.drop([('Player ID',   'sum'), (  'Shot xG', 'count'), (   'isGoal', 'count'),
                     (   'x', 'count'), (   'x', 'sum'), (   'y', 'count'), (   'y', 'sum')], axis=1)
     df_gb.columns = ['Total Shots', 'Total xG', 'Total Goals', 'Distance From Goal']
+    df_gb['xG per Shot'] = df_gb['Total xG']/df_gb['Total Shots']
     df_gb['xG Overperformance'] = df_gb['Total Goals'] - df_gb['Total xG']
     df_gb['xG O/P per Shot'] = df_gb['xG Overperformance']/df_gb['Total Shots']
     return df_gb
@@ -77,7 +80,8 @@ else:
     
 if st.button('Click For Visualisation Generation'):
     st.header("PLAYER SHOT DATAFRAME")
-    st.dataframe(df_fil.drop(['x','y', 'h_a', 'isGoal', 'Filter Game_State'], axis=1).reset_index(drop=True), width = 2000, height=250)
+    st.dataframe(df_fil.drop(['x','y', 'h_a', 'isGoal', 'Player ID', 'Filter Game_State'], axis=1).reset_index(drop=True), 
+                width = 2000, height=250)
     df_fil_save = convert_df(df_fil)
     
     st.download_button(
@@ -89,7 +93,7 @@ if st.button('Click For Visualisation Generation'):
 
     theme_dict = {'light':'white', 'dark':'black'}
     st.header("\nPLAYER SHOT MAP")
-    fig, ax = plot_pitch(df_fil, theme=theme, player_col=player_col)
+    fig, ax = plot_pitch(df_fil, theme=theme, player_col=player_col, alpha=goal_alpha)
     plt.savefig('static/PlayerShots.png', dpi=300, facecolor=theme_dict[theme])
     st.pyplot(fig)
     with open("static/PlayerShots.png", "rb") as file:
@@ -106,7 +110,7 @@ if st.button('Click For Visualisation Generation'):
 st.markdown("""
     ### GUIDE TO THE WIDGET ELEMENTS
 
-    1. Player ID - Player ID for player on Understat.com(https://www.understat.com)
+    1. Player ID - Player Name and ID for player on Understat.com (https://www.understat.com)
     2. Range Of Season - Filter for seasons of relevance
     3. Filter Game State - Shots during a particular type (or types) of game state
     4. Show Only Goals - Filter for only goals
@@ -114,6 +118,7 @@ st.markdown("""
     6. Game State Altering Moments - Show only those goals which altered the game state
     7. Pick A Colour - Choose colour for goal scatter points
     8. Visualisation Theme - Choose between light and dark themed templates
+    9. Change Transparency - Adjust transparency parameter for goal scatter points in shotmap
 """)
 
 hide_streamlit_style = """

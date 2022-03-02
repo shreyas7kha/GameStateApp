@@ -5,7 +5,6 @@ import matplotlib.patches as patches
 
 import numpy as np
 
-
 def dark_theme():
     mpl.rcParams['font.size'] = 12
     mpl.rcParams['font.weight'] = 'bold'
@@ -21,7 +20,7 @@ def light_theme():
     return 'black', 'white'
 
 
-def plot_pitch(df, theme = 'light', player_col='red'):
+def plot_pitch(df, theme = 'light', player_col='red', alpha=0.5):
     if theme == 'light':
         point_color, bg_color = light_theme()
     elif theme == 'dark':
@@ -42,7 +41,7 @@ def plot_pitch(df, theme = 'light', player_col='red'):
     # SCATTER POINTS
     goal_cond = df['Shot Result']=='Goal'
     pitch.scatter(df[~goal_cond]['x']*100, df[~goal_cond]['y']*100, c='none', ec=point_color, alpha=0.15, ax=ax)
-    pitch.scatter(df[goal_cond]['x']*100, df[goal_cond]['y']*100, c='none', ec=player_col, hatch='////////', alpha=0.5, ax=ax)
+    pitch.scatter(df[goal_cond]['x']*100, df[goal_cond]['y']*100, c='none', ec=player_col, hatch='////////', alpha=alpha, ax=ax)
 
     # INTERNAL DATA
     player = df['Player'].unique()[0]
