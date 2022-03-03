@@ -4,9 +4,18 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from plot import plot_pitch
 
-df = pd.read_csv('data/AppData.gz', encoding='utf-8-sig')
-df_fil = df.copy()
-df_fil['isGoal'] = df_fil['isGoal'].apply(abs)
+# ADDING CACHE OPTIONS
+@st.cache
+def load_data():
+    return pd.read_csv('data/AppData.gz', encoding='utf-8-sig')
+df = load_data()
+
+@st.cache
+def pre_format_data():
+    df_copy = df.copy()
+    df_copy['isGoal'] = df_copy['isGoal'].apply(abs)
+    return df_copy
+df_fil = pre_format_data()
 
 st.title("All About GameStates")
 
