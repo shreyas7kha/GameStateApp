@@ -30,8 +30,8 @@ player_id = st.sidebar.selectbox("Input Understat Player Name and ID:",
 )
 start_year, end_year = st.sidebar.select_slider(
      "Select Range of Seasons:",
-     options=[x for x in range(2014, 2022)],
-     value=(2014,2020)
+     options=[x for x in range(2014, 2023)],
+     value=(2014,2021)
 )
 filter_gs = st.sidebar.multiselect(
     "Filter for Game States:",
